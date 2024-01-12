@@ -14,3 +14,13 @@ spec:
                 name: mongodb-express-service
                 port:
                   number: 8081
+    - host: server.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: practise-service
+                port:
+                  number: 8000

@@ -92,3 +92,41 @@ spec:
     - protocol: TCP
       port: 8081
       targetPort: 8081
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: practise
+  labels:
+    app: practise
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: practise
+  template:
+    metadata:
+      labels:
+        app: practise
+    spec:
+      containers:
+        - name: practise
+          image: practise:latest
+          resources:
+            requests:
+              cpu: "100m"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: practise-service
+spec:
+  selector:
+    app: practise
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
